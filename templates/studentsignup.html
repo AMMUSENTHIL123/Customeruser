@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/free-vector/vintage-ornamental-flowers-background-with-lights_1419-1943.jpg?ga=GA1.1.696215349.1733857143&semt=ais_incoming'); /* Replace with your actual image path */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: rgb(188, 233, 7); /* Text color for better contrast */
+        }
+
+        .welcome-container {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+            padding: 30px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"> 
+        <a class="navbar-brand" href="#">EDU@SPOT </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-controls="navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home'  %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'login1'  %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'student1' %}">student Signup</a> 
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'teacher1' %}">Teacher Signup</a> 
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="welcome-container">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+
+                                <center>
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                        <li class="alert alert-{{ message.tags }} w-75">{{ message }}</li>
+                                    {% endfor %}
+                                    {% endif %}
+                                </center>
+                                <h2 class="text-center mb-4">Student</h2>
+                                <form method="post" enctype="multipart/form-data" action="{% url 'studentsignup' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="name">Full Name:</label>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Full Name">
+                                      </div>
+                                    <div class="form-group">
+                                        <label for="course">Course:</label>
+                                        <select class="form-control" id="course" name="course">
+                                          <option value="1">Mathematics</option>
+                                          <option value="2">Physics</option>
+                                          <option value="3">Chemistry</option>
+                                        </select>
+                                      </div>
+                                      <div class="form-group">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                        <small id="emailError" class="text-danger"></small>
+                                      </div>
+                                    <div class="form-group">
+                                        <label for="age">Age:</label>
+                                        <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone_number">Phone Number:</label>
+                                        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Enter Phone Number">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" id="exampleInputPassword1" name="text" value="3">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image">Image:</label>
+                                        <input type="file" class="form-control-file" id="image" name="image">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">Username:</label>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
+                                    </div>
+                                      
+                                    <button type="submit" class="btn btn-primary btn-block">Create Student</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
